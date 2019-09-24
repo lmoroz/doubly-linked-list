@@ -2,30 +2,30 @@ const Node = require('./node');
 
 class LinkedList {
     constructor() {
-        this.head = new Node;
-        this.tail = new Node;
+        this._head = new Node;
+        this._tail = new Node;
         this.length = 0;
     }
 
     append(data) {
-        const oldTail = this.tail;
-        this.tail = new Node(data, null, oldTail);
-        if (!this.length) this.head = this.tail;
-        else oldTail.prev = this.tail;
+        const oldTail = this._tail;
+        this._tail = new Node(data, null, oldTail);
+        if (!this.length) this._head = this._tail;
+        else oldTail.prev = this._tail;
         this.length++;
         return this;
     }
 
     head() {
-        return this.head.data;
+        return this._head.data;
     }
 
     tail() {
-        return this.tail.data;
+        return this._tail.data;
     }
 
     at(index) {
-        let temp = this.head;
+        let temp = this._head;
         for (let i = 0; i < index; i++) {
             temp = temp.prev;
         }
@@ -35,7 +35,7 @@ class LinkedList {
 
     insertAt(index, data) {
         if (this.length > 0) {
-            let temp = this.head;
+            let temp = this._head;
             for (let i = 0; i < index; i++) {
                 temp = temp.prev;
             }
@@ -49,15 +49,15 @@ class LinkedList {
     }
 
     clear() {
-        this.head = new Node;
-        this.tail = this.head;
+        this._head = new Node;
+        this._tail = this._head;
         this.length = 0;
         return new LinkedList();
     }
 
     deleteAt(index) {
 
-        let temp = this.head;
+        let temp = this._head;
         for (let i = 0; i < index; i++) {
             temp = temp.prev;
         }
@@ -71,7 +71,7 @@ class LinkedList {
 
     reverse() {
 
-        let temp = null, current = this.head;
+        let temp = null, current = this._head;
 
         while (current != null) {
             temp = current.prev;
@@ -80,16 +80,16 @@ class LinkedList {
             current = current.next;
         }
         if (temp != null) {
-            this.head = temp.next;
+            this._head = temp.next;
         }
-        temp = this.tail;
-        this.tail = this.head;
-        this.head = temp;
+        temp = this._tail;
+        this._tail = this._head;
+        this._head = temp;
         return this;
     }
 
     indexOf(data) {
-        let temp = this.head;
+        let temp = this._head;
         for (let i = 0; i < this.length; i++) {
             if (temp.data === data) return i;
             else temp = temp.prev;
